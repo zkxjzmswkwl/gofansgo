@@ -363,6 +363,14 @@ func main() {
 			os.Exit(1)
 		}
 		rpm = float32(v)
+		if rpm < 0 {
+			rpm = 0
+			fmt.Fprintf(os.Stderr, "rpm is too low, clamping to 0\n")
+		}
+		if rpm > 5200 {
+			rpm = 5200
+			fmt.Fprintf(os.Stderr, "rpm is too high, clamping to 5200\n")
+		}
 	}
 
 	smc, err := Open()
